@@ -10,7 +10,7 @@ RUN apt-get update -y && \
                                                gdal-bin \
                                                libgdal-dev
 
-USER ${USERNAME}
+#USER ${USERNAME}
 
 # Install R package and its dependencies
 COPY myshinyapp/ ./myshinyapp
