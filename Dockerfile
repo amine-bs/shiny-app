@@ -12,7 +12,7 @@ RUN apt-get update -y && \
                                                libgdal-dev
 
 #USER ${USERNAME}
-
+RUN install2.r remotes
 # Install R package and its dependencies
 COPY myshinyapp/ ./myshinyapp
 RUN Rscript -e 'remotes::install_deps("./myshinyapp")'
