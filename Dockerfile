@@ -2,6 +2,7 @@
 FROM inseefrlab/onyxia-r-minimal
 
 # Install required linux librairies
+USER root
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends libpq-dev \ 
                                                libssl-dev \
@@ -9,7 +10,7 @@ RUN apt-get update -y && \
                                                gdal-bin \
                                                libgdal-dev
 
-
+USER ${USERNAME}
 
 # Install R package and its dependencies
 COPY myshinyapp/ ./myshinyapp
