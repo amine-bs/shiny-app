@@ -1,8 +1,9 @@
 # Base image
-FROM inseefrlab/onyxia-r-minimal
+#FROM inseefrlab/onyxia-r-minimal
+FROM rocker/shiny:4.1.2
 
 # Install required linux librairies
-USER root
+#USER root
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends libpq-dev \ 
                                                libssl-dev \
