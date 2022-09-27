@@ -1,5 +1,5 @@
 # Base image
-FROM rocker/shiny:4.1.2
+FROM inseefrlab/onyxia-r-minimal
 
 # Install required linux librairies
 RUN apt-get update -y && \
@@ -10,7 +10,6 @@ RUN apt-get update -y && \
                                                libgdal-dev
 
 # Install R package and its dependencies
-RUN install2.r remotes
 COPY myshinyapp/ ./myshinyapp
 RUN Rscript -e 'remotes::install_deps("./myshinyapp")'
 RUN Rscript -e 'install.packages("./myshinyapp", repos = NULL, type="source")'
