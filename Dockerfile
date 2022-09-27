@@ -1,9 +1,8 @@
 # Base image
-#FROM inseefrlab/onyxia-r-minimal
-FROM rocker/shiny:4.1.2
+FROM inseefrlab/onyxia-r-minimal
 
 # Install required linux librairies
-#USER root
+USER root
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends libpq-dev \ 
                                                libssl-dev \
@@ -11,8 +10,6 @@ RUN apt-get update -y && \
                                                gdal-bin \
                                                libgdal-dev
 
-#USER ${USERNAME}
-RUN install2.r remotes
 # Install R package and its dependencies
 COPY myshinyapp/ ./myshinyapp
 RUN Rscript -e 'remotes::install_deps("./myshinyapp")'
@@ -24,5 +21,6 @@ EXPOSE $SHINY_PORT
 RUN echo "local({options(shiny.port = ${SHINY_PORT}, shiny.host = '0.0.0.0')})" >> /usr/local/lib/R/etc/Rprofile.site
 
 # Endpoint
-#CMD ["Rscript", "-e", "myshinyapp::runApp()"]
-CMD ["/bin/bash"]
+CMD ["Rscript", "-e", "myshinyapp::runApp()"]
+USER ${USERNAME}
+
