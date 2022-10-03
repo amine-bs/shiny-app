@@ -19,9 +19,9 @@ RUN Rscript -e 'install.packages("./myshinyapp", repos = NULL, type="source")'
 ARG SHINY_PORT=3838
 EXPOSE $SHINY_PORT
 RUN echo "local({options(shiny.port = ${SHINY_PORT}, shiny.host = '0.0.0.0')})" >> /usr/local/lib/R/etc/Rprofile.site
-
+USER ${USERNAME}
 # Endpoint
 CMD ["Rscript", "-e", "myshinyapp::runApp()"]
-#USER ${USERNAME}
+
 #CMD ["/bin/bash"]
 
